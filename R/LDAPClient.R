@@ -1,5 +1,33 @@
 #' LDAPClient
+#'
+#' @docType class
+#' @importFrom R6 R6Class
+#' @import RCurl
 #' @export
+#' @keywords ldap
+#' @return Object of \code{\link{R6Class}} with methods for communication a LDAP.
+#' @format \code{\link{R6Class}} object.
+#' 
+#' @examples
+#' \dontrun{
+#'   ldap <- LDAPClient$new(hostname = "localhost", port 389, dc = "planetexpress.com")
+#' }
+#'
+#' @field url URL of the LDAP
+#' @field root root LDAP DN
+#'
+#' @section Methods:
+#' \describe{
+#'  \item{\code{new(hostname, port, dc)}}{
+#'    This method is used to instantiate a LDAP client.
+#'  }
+#'  \item{\code{getPersons(pretty)}}{
+#'    Retrieves a list of persons. By default, this is returned as \code{data.frame}.
+#'    Set \code{pretty = FALSE} to return a list of \link{LDAPPerson} objects.
+#'  }
+#' }
+#' 
+#' @author Emmanuel Blondel <emmanuel.blondel1@@gmail.com>
 LDAPClient <- R6Class("LDAPClient",
   private = list(),
   public = list(
@@ -16,7 +44,7 @@ LDAPClient <- R6Class("LDAPClient",
     
     #getPersons
     getPersons = function(pretty = TRUE){
-      people_attrs <- c("cn","sn","givenName", "mail", "ou", "employeeType")
+      people_attrs <- c("uid", "cn","sn","givenName", "mail", "title", "ou", "employeeType", "objectClass")
       ldap_person <- RCurl::getURL(sprintf("%s?%s?sub?(objectClass=person)", self$url, paste0(people_attrs,collapse=",")))
       ldap_person_dn <- unlist(strsplit(ldap_person, "DN: "))
       ldap_person_dn <- ldap_person_dn[ldap_person_dn!=""]
