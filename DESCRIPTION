@@ -5,7 +5,7 @@ Title: R interface to LDAP
 Authors@R: c(person("Emmanuel", "Blondel", role = c("aut", "cre"), email = "emmanuel.blondel1@gmail.com", comment = c(ORCID = "0000-0002-5870-5762")))
 Maintainer: Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 Depends: R (>= 3.3), methods
-Imports: R6, RCurl
+Imports: R6, RCurl, plyr
 Suggests: testthat
 Description: R interface to LDAP
 License: MIT + file LICENSE

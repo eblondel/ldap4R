@@ -3,6 +3,7 @@
 #' @docType class
 #' @importFrom R6 R6Class
 #' @import RCurl
+#' @import plyr
 #' @export
 #' @keywords ldap
 #' @return Object of \code{\link{R6Class}} with methods for communication a LDAP.
