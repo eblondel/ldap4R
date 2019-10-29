@@ -25,8 +25,9 @@ LDAPClient
 \section{Methods}{
 
 \describe{
- \item{\code{new(hostname, port, dc)}}{
-   This method is used to instantiate a LDAP client.
+ \item{\code{new(hostname, port, dc, logger)}}{
+   This method is used to instantiate a LDAP client.  The logger can be either
+   NULL, "INFO" (with minimum logs), or "DEBUG" (for complete curl calls logs)
  }
  \item{\code{getPersons(pretty)}}{
    Retrieves a list of persons. By default, this is returned as \code{data.frame}.

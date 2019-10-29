@@ -3,6 +3,7 @@
 export(LDAPClient)
 export(LDAPObject)
 export(LDAPPerson)
+export(ldap4RLogger)
 import(R6)
 import(RCurl)
 import(plyr)
