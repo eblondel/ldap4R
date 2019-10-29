@@ -40,8 +40,8 @@ LDAPPerson <- R6Class("LDAPPerson",
     objectClass = NULL,
     initialize = function(dn){
       props <- unlist(strsplit(gsub("\n","", dn),"\t"))
-      propnames <- sapply(props, function(x){unlist(strsplit(x,": ", fixed = TRUE))[1]})
-      props <- lapply(props, function(x){unlist(strsplit(x,": ", fixed = TRUE))[2]})
+      propnames <- sapply(props, function(x){unlist(strsplit(x,": ", perl = TRUE))[1]})
+      props <- lapply(props, function(x){unlist(strsplit(x,": ", perl = TRUE))[2]})
       names(props) <- propnames
       props <- props[names(props)!="DN"]
       

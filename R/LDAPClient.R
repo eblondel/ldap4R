@@ -46,7 +46,7 @@ LDAPClient <- R6Class("LDAPClient",
     getPersons = function(pretty = TRUE){
       people_attrs <- c("uid", "cn","sn","givenName", "mail", "title", "ou", "employeeType", "objectClass")
       ldap_person <- RCurl::getURL(sprintf("%s?%s?sub?(objectClass=person)", self$url, paste0(people_attrs,collapse=",")))
-      ldap_person_dn <- unlist(strsplit(ldap_person, "DN: ", fixed = TRUE))
+      ldap_person_dn <- unlist(strsplit(ldap_person, "DN: ", perl = TRUE))
       ldap_person_dn <- ldap_person_dn[ldap_person_dn!=""]
       ldap_person_dn <- paste("DN:", ldap_person_dn)
       persons <- lapply(ldap_person_dn, LDAPPerson$new)
