@@ -37,7 +37,7 @@ LDAPClient
 
 \examples{
 \dontrun{
-  ldap <- LDAPClient$new(hostname = "localhost", port 389, dc = "planetexpress.com")
+  ldap <- LDAPClient$new(hostname = "localhost", port = 389, dc = "planetexpress.com")
 }
 
 }
