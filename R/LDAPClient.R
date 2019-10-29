@@ -31,15 +31,19 @@
 LDAPClient <- R6Class("LDAPClient",
   private = list(),
   public = list(
-    url = NULL,
+    root_url = NULL,
     root = NULL,
+    dc = NULL,
+    url = NULL,
     initialize = function(hostname, port = NULL, dc){
       if(!is.null(port)) hostname <- paste0(hostname, ":", port)
       dcurl <- paste0(lapply(unlist(strsplit(dc,"\\.")), function(x){paste0("dc=",x)}),collapse=",")
-      self$url <- sprintf("ldap://%s/%s", hostname, dcurl)
-      print(self$url)
-      self$root <- RCurl::getURL(self$url)
+      self$root_url <- sprintf("ldap://%s", hostname)
+      self$root <- RCurl::getURL(self$root_url)
       message(self$root)
+      self$dc <- dcurl
+      self$url <- sprintf("ldap://%s/%s", hostname, dcurl)
+      
     },
     
     #getPersons

@@ -1,10 +1,8 @@
 #' LDAPPerson
 #'
 #' @docType class
-#' @importFrom R6 R6Class
-#' @import RCurl
 #' @export
-#' @keywords ldap
+#' @keywords ldap person
 #' @return Object of \code{\link{R6Class}} representing a LDAP person.
 #' @format \code{\link{R6Class}} object.
 #'
@@ -27,6 +25,7 @@
 #' 
 #' @author Emmanuel Blondel <emmanuel.blondel1@@gmail.com>
 LDAPPerson <- R6Class("LDAPPerson",
+  inherit = LDAPObject,
   private = list(),
   public = list(
     uid = NULL,
@@ -39,16 +38,12 @@ LDAPPerson <- R6Class("LDAPPerson",
     employeeType = NULL,
     objectClass = NULL,
     initialize = function(dn){
-      props <- unlist(strsplit(gsub("\n","", dn),"\t"))
-      propnames <- sapply(props, function(x){unlist(strsplit(x,": ", perl = TRUE))[1]})
-      props <- lapply(props, function(x){unlist(strsplit(x,": ", perl = TRUE))[2]})
-      names(props) <- propnames
-      props <- props[names(props)!="DN"]
-      
-      for(propname in names(props)){
-        value <- props[names(props)==propname]
+      super$initialize(dn)
+      person_attrs <- self$getAttributes()
+      for(attrname in names(person_attrs)){
+        value <- person_attrs[names(person_attrs)==attrname]
         if(is.list(value)) value <- unlist(value)
-        self[[propname]] <- value
+        self[[attrname]] <- value
       }
     }
   )

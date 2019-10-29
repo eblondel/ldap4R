@@ -33,3 +33,4 @@ LDAPPerson
 Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 }
 \keyword{ldap}
+\keyword{person}
