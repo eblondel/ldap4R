@@ -27,18 +27,6 @@ matrix:
     before_install:
     - docker pull rroemhild/test-openldap
     - docker run --privileged -d -p 389:389 rroemhild/test-openldap
-  - name: "OpenLDAP | osx"
-    os: osx
-    services: docker
-    before_install:
-    - docker pull rroemhild/test-openldap
-    - docker run --privileged -d -p 389:389 rroemhild/test-openldap
-  - name: "OpenLDAP | windows"
-    os: windows
-    services: docker
-    before_install:
-    - docker pull rroemhild/test-openldap
-    - docker run --privileged -d -p 389:389 rroemhild/test-openldap
 
 after_script:
  - ./travis-tool.sh dump_logs
